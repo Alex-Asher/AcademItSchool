@@ -1,4 +1,4 @@
-package ru.academits.oop.asher.range;
+package ru.academits.oop.asher.rangetask.range;
 
 public class Range {
     private double from;
@@ -44,12 +44,13 @@ public class Range {
         if (from <= range.from && to >= range.to) {
             return new Range(range.from, range.to);
         }
-        if (from > range.from && to < range.to) {
+        if (from >= range.from && to <= range.to) {
             return new Range(from, to);
         }
         if (range.isInside(from) && from < range.to) {
             return new Range(from, range.to);
         }
+
         return new Range(range.from, to);
     }
 
@@ -60,12 +61,13 @@ public class Range {
         if (from <= range.from && to >= range.to) {
             return new Range[]{new Range(from, to)};
         }
-        if (from > range.from && to < range.to) {
+        if (from >= range.from && to <= range.to) {
             return new Range[]{new Range(range.from, range.to)};
         }
         if (range.isInside(from) && from <= range.to) {
             return new Range[]{new Range(range.from, to)};
         }
+
         return new Range[]{new Range(from, range.to)};
     }
 
@@ -76,16 +78,22 @@ public class Range {
         if (from < range.from && to > range.to) {
             return new Range[]{new Range(from, range.from), new Range(range.to, to)};
         }
-        if ((from > range.from && to < range.to) || (from == range.from && to == range.to)) {
+        if (from >= range.from && to <= range.to) {
             return new Range[0];
         }
         if (range.isInside(from) && from < range.to) {
             return new Range[]{new Range(range.to, to)};
         }
+
         return new Range[]{new Range(from, range.from)};
     }
 
+    //Примечание: обработка исключения не работает
     public void print() {
-        System.out.println(from + ", " + to);
+        try {
+            System.out.print("(" + from + "; " + to + ")");
+        } catch (NullPointerException e) {
+            System.out.print("нет результата");
+        }
     }
 }
