@@ -1,4 +1,4 @@
-package ru.academits.oop.asher.rangetask.range;
+package ru.academits.oop.asher.range_task.range;
 
 public class Range {
     private double from;
@@ -88,12 +88,7 @@ public class Range {
         return new Range[]{new Range(from, range.from)};
     }
 
-    //Примечание: обработка исключения не работает
     public void print() {
-        try {
-            System.out.print("(" + from + "; " + to + ")");
-        } catch (NullPointerException e) {
-            System.out.print("нет результата");
-        }
+        System.out.print("(" + from + "; " + to + ")");
     }
 }

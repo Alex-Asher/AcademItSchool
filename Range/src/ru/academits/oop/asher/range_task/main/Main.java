@@ -1,12 +1,20 @@
-package ru.academits.oop.asher.rangetask.main;
+package ru.academits.oop.asher.range_task.main;
 
-import ru.academits.oop.asher.rangetask.range.Range;
+import ru.academits.oop.asher.range_task.range.Range;
 
 public class Main {
     public static void main(String[] args) {
         Range range1 = new Range(1, 5);
-        System.out.println("Длина первого интервала: " + range1.getLength());
+        System.out.print("Первый интервал: ");
+        range1.print();
+        System.out.println();
+
         Range range2 = new Range(3, 5);
+        System.out.print("Второй интервал: ");
+        range2.print();
+        System.out.println();
+
+        System.out.println("Длина первого интервала: " + range1.getLength());
         System.out.println("Длина второго интервала: " + range2.getLength());
 
         double number = 3;
