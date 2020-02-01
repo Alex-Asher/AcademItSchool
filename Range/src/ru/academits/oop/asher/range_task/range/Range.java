@@ -36,39 +36,23 @@ public class Range {
         return number >= from && number <= to;
     }
 
+    public boolean haveIntersection(Range range) {
+        return !(from >= range.to) && !(range.from >= to);
+    }
+
     //Примечание (для себя): в этой задаче считаем, что если у отрезков одна общая точка, то они НЕ пересекаются
     public Range getIntersection(Range range) {
-        if (from >= range.to || range.from >= to) {
-            return null;
+        if (range.haveIntersection(this)) {
+            return new Range(Math.max(from, range.from), Math.min(to, range.to));
         }
-        if (from <= range.from && to >= range.to) {
-            return new Range(range.from, range.to);
-        }
-        if (from >= range.from && to <= range.to) {
-            return new Range(from, to);
-        }
-        if (range.isInside(from) && from < range.to) {
-            return new Range(from, range.to);
-        }
-
-        return new Range(range.from, to);
+        return null;
     }
 
     public Range[] getUnion(Range range) {
-        if (from > range.to || range.from > to) {
-            return new Range[]{new Range(from, to), new Range(range.from, range.to)};
+        if (range.haveIntersection(this)) {
+            return new Range[]{new Range(Math.min(from, range.from), Math.max(to, range.to))};
         }
-        if (from <= range.from && to >= range.to) {
-            return new Range[]{new Range(from, to)};
-        }
-        if (from >= range.from && to <= range.to) {
-            return new Range[]{new Range(range.from, range.to)};
-        }
-        if (range.isInside(from) && from <= range.to) {
-            return new Range[]{new Range(range.from, to)};
-        }
-
-        return new Range[]{new Range(from, range.to)};
+        return new Range[]{new Range(from, to), new Range(range.from, range.to)};
     }
 
     public Range[] getDifference(Range range) {
