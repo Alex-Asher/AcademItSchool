@@ -9,7 +9,7 @@ public class Main {
         range1.print();
         System.out.println();
 
-        Range range2 = new Range(3, 5);
+        Range range2 = new Range(5, 6);
         System.out.print("Второй интервал: ");
         range2.print();
         System.out.println();
