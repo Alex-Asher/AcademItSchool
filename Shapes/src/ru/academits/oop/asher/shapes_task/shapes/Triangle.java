@@ -65,58 +65,62 @@ public class Triangle implements Shape {
         this.y3 = y3;
     }
 
-    public double getSide(double x1, double y1, double x2, double y2) {
+    private static double getSide(double x1, double y1, double x2, double y2) {
         return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
     }
 
+    @Override
     public double getWidth() {
         double max = Math.max(x1, x2);
-        if (x3 > max) {
-            max = x3;
-        }
+        max = Math.max(max, x3);
 
         double min = Math.min(x1, x2);
-        if (x3 < min) {
-            min = x3;
-        }
+        min = Math.min(min, x3);
 
         return max - min;
     }
 
+    @Override
     public double getHeight() {
         double max = Math.max(y1, y2);
-        if (y3 > max) {
-            max = y3;
-        }
+        max = Math.max(max, y3);
 
         double min = Math.min(y1, y2);
-        if (y3 < min) {
-            min = y3;
-        }
+        min = Math.min(min, y3);
 
         return max - min;
     }
 
+    @Override
     public double getArea() {
         return Math.abs(0.5 * ((x1 - x3) * (y2 - y3) - (x2 - x3) * (y1 - y3)));
     }
 
+    @Override
     public double getPerimeter() {
         return getSide(x1, y1, x2, y2) + getSide(x2, y2, x3, y3) + getSide(x3, y3, x1, y1);
     }
 
+    @Override
     public String toString() {
-        return "Треугольник с координатами " + x1 + ", " + x2 + ", " + x3 + "; " + y1 + ", " + y2 + ", " + y3;
+        return "Треугольник с координатами: (" + x1 + "; " + y1 + "), (" + x2 + "; " + y2 + "), (" +
+                x3 + "; " + y3 + ")";
     }
 
+    @Override
     public boolean equals(Object object) {
-        if (object == this) return true;
-        if (object == null || object.getClass() != this.getClass()) return false;
+        if (object == this) {
+            return true;
+        }
+        if (object == null || object.getClass() != getClass()) {
+            return false;
+        }
         Triangle triangle = (Triangle) object;
         return x1 == triangle.x1 && x2 == triangle.x2 && x3 == triangle.x3 && y1 == triangle.y1 &&
                 y2 == triangle.y2 && y3 == triangle.y3;
     }
 
+    @Override
     public int hashCode() {
         final int prime = 37;
         int hash = 1;

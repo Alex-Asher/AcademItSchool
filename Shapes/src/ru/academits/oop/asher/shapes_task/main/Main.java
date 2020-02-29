@@ -6,16 +6,16 @@ import ru.academits.oop.asher.shapes_task.shapes.*;
 import java.util.Arrays;
 
 public class Main {
-    public static Shape findMaxArea(Shape[] shapes) {
+    public static Shape findShapeWithMaxArea(Shape[] shapes) {
         AreaComparator areaComparator = new AreaComparator();
         Arrays.sort(shapes, areaComparator);
-        return shapes[0];
+        return shapes[shapes.length - 1];
     }
 
-    public static Shape findSecondMaxPerimeter(Shape[] shapes) {
+    public static Shape findShapeWithSecondMaxPerimeter(Shape[] shapes) {
         PerimeterComparator perimeterComparator = new PerimeterComparator();
         Arrays.sort(shapes, perimeterComparator);
-        return shapes[1];
+        return shapes[shapes.length - 2];
     }
 
     public static void main(String[] args) {
@@ -36,10 +36,10 @@ public class Main {
         Shape[] myShapes = {square1, square2, square3, triangle1, triangle2, rectangle1, rectangle2, rectangle3,
                 circle1, circle2};
 
-        Shape shapeWithMaxArea = findMaxArea(myShapes);
+        Shape shapeWithMaxArea = findShapeWithMaxArea(myShapes);
         System.out.println(shapeWithMaxArea.toString());
 
-        Shape shapeWithSecondMaxPerimeter = findSecondMaxPerimeter(myShapes);
+        Shape shapeWithSecondMaxPerimeter = findShapeWithSecondMaxPerimeter(myShapes);
         System.out.println(shapeWithSecondMaxPerimeter.toString());
     }
 }

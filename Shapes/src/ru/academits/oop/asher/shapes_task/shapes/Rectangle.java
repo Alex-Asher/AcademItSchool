@@ -1,62 +1,65 @@
 package ru.academits.oop.asher.shapes_task.shapes;
 
 public class Rectangle implements Shape {
-    private double x;
-    private double y;
+    private double width;
+    private double height;
 
-    public Rectangle(double x, double y) {
-        this.x = x;
-        this.y = y;
+    public Rectangle(double width, double height) {
+        this.width = width;
+        this.height = height;
     }
 
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public void setY(double y) {
-        this.y = y;
-    }
-
+    @Override
     public double getWidth() {
-        return Math.min(x, y);
+        return width;
     }
 
+    @Override
     public double getHeight() {
-        return Math.max(x, y);
+        return height;
     }
 
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    @Override
     public double getArea() {
-        return x * y;
+        return width * height;
     }
 
+    @Override
     public double getPerimeter() {
-        return 2 * x + 2 * y;
+        return 2 * width + 2 * height;
     }
 
+    @Override
     public String toString() {
-        return "Прямоугольник с длинами сторон " + x + " и " + y;
+        return "Прямоугольник с длинами сторон " + width + " и " + height;
     }
 
+    @Override
     public boolean equals(Object object) {
-        if (object == this) return true;
-        if (object == null || object.getClass() != this.getClass()) return false;
+        if (object == this) {
+            return true;
+        }
+        if (object == null || object.getClass() != getClass()) {
+            return false;
+        }
         Rectangle rectangle = (Rectangle) object;
-        return x == rectangle.x && y == rectangle.y;
+        return width == rectangle.width && height == rectangle.height;
     }
 
+    @Override
     public int hashCode() {
         final int prime = 37;
         int hash = 1;
-        hash = prime * hash + Double.hashCode(x);
-        hash = prime * hash + Double.hashCode(y);
+        hash = prime * hash + Double.hashCode(width);
+        hash = prime * hash + Double.hashCode(height);
         return hash;
     }
 }

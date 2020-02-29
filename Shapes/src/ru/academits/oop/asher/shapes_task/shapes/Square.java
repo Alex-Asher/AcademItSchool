@@ -1,51 +1,58 @@
 package ru.academits.oop.asher.shapes_task.shapes;
 
 public class Square implements Shape {
-    private double x;
+    private double width;
 
-    public Square(double x) {
-        this.x = x;
+    public Square(double width) {
+        this.width = width;
     }
 
-    public double getX() {
-        return x;
-    }
-
-    public void setX(double x) {
-        this.x = x;
-    }
-
+    @Override
     public double getWidth() {
-        return x;
+        return width;
     }
 
+    @Override
     public double getHeight() {
-        return x;
+        return width;
     }
 
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    @Override
     public double getArea() {
-        return 2 * x;
+        return width * width;
     }
 
+    @Override
     public double getPerimeter() {
-        return 4 * x;
+        return 4 * width;
     }
 
+    @Override
     public String toString() {
-        return "Квадрат с длиной стороны " + x;
+        return "Квадрат с длиной стороны " + width;
     }
 
+    @Override
     public boolean equals(Object object) {
-        if (object == this) return true;
-        if (object == null || object.getClass() != this.getClass()) return false;
+        if (object == this) {
+            return true;
+        }
+        if (object == null || object.getClass() != getClass()) {
+            return false;
+        }
         Square square = (Square) object;
-        return x == square.x;
+        return width == square.width;
     }
 
+    @Override
     public int hashCode() {
         final int prime = 37;
         int hash = 1;
-        hash = prime * hash + Double.hashCode(x);
+        hash = prime * hash + Double.hashCode(width);
         return hash;
     }
 }
