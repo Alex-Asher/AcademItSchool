@@ -48,6 +48,7 @@ public class Circle implements Shape {
         if (object == null || object.getClass() != getClass()) {
             return false;
         }
+
         Circle circle = (Circle) object;
         return radius == circle.radius;
     }

@@ -44,6 +44,7 @@ public class Square implements Shape {
         if (object == null || object.getClass() != getClass()) {
             return false;
         }
+
         Square square = (Square) object;
         return width == square.width;
     }

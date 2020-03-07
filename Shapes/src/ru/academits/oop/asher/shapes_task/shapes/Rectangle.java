@@ -50,6 +50,7 @@ public class Rectangle implements Shape {
         if (object == null || object.getClass() != getClass()) {
             return false;
         }
+
         Rectangle rectangle = (Rectangle) object;
         return width == rectangle.width && height == rectangle.height;
     }
