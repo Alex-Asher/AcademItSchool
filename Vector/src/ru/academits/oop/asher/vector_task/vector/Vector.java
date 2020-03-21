@@ -108,25 +108,25 @@ public class Vector {
 
     // Нестатический метод для умножения вектора на скаляр
     public void multiplyByScalar(double scalar) {
-        for (int i = 0; i < this.components.length; i++) {
-            this.components[i] = this.components[i] * scalar;
+        for (int i = 0; i < components.length; i++) {
+            components[i] = components[i] * scalar;
         }
     }
 
     // Нестатический метод для разворота вектора
     public void invert() {
-        this.multiplyByScalar(-1);
+        multiplyByScalar(-1);
     }
 
     // Нестатический метод для получения длины вектора
     public double getLength() {
-        double sumOfSquares = 0;
+        double squaresSum = 0;
 
-        for (double component : this.components) {
-            sumOfSquares += Math.pow(component, 2);
+        for (double component : components) {
+            squaresSum += Math.pow(component, 2);
         }
 
-        return Math.sqrt(sumOfSquares);
+        return Math.sqrt(squaresSum);
     }
 
     // Нестатический метод для получения компоненты вектора по индексу
@@ -150,7 +150,7 @@ public class Vector {
         }
 
         Vector vector = (Vector) object;
-        return components.length == vector.components.length && Arrays.equals(components, vector.components);
+        return Arrays.equals(components, vector.components);
     }
 
     // Переопределение метода hashCode
