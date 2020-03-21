@@ -27,14 +27,14 @@ public class Main {
         System.out.println(size);
 
         System.out.println("Сложение векторов 3 и 4 нестатическим и статическим методами: ");
-        vector3.getSum(vector4);
+        vector3.add(vector4);
         System.out.println(vector3.toString());
 
         Vector vector5 = Vector.getSum(vector3, vector4);
         System.out.println(vector5.toString());
 
         System.out.println("Вычитание векторов 3 и 4 нестатическим и статическим методами: ");
-        vector3.getDifference(vector4);
+        vector3.subtract(vector4);
         System.out.println(vector3.toString());
 
         Vector vector6 = Vector.getDifference(vector3, vector4);

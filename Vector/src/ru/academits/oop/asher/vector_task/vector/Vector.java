@@ -14,11 +14,6 @@ public class Vector {
         this.components = new double[dimension];
     }
 
-    // Метод для получения размерности вектора
-    public int getSize() {
-        return components.length;
-    }
-
     // Второй конструктор - конструктор копирования
     public Vector(Vector vector) {
         this.components = Arrays.copyOf(vector.components, vector.getSize());
@@ -26,6 +21,10 @@ public class Vector {
 
     // Третий конструктор, принимающий массив components
     public Vector(double[] components) {
+        if (components.length == 0) {
+            throw new IllegalArgumentException("Размерность вектора должна быть больше нуля.");
+        }
+
         this.components = Arrays.copyOf(components, components.length);
     }
 
@@ -36,6 +35,11 @@ public class Vector {
         }
 
         this.components = Arrays.copyOf(components, dimension);
+    }
+
+    // Метод для получения размерности вектора
+    public int getSize() {
+        return components.length;
     }
 
     // Переопределение метода toString
@@ -55,9 +59,10 @@ public class Vector {
     }
 
     // Нестатический метод для сложения векторов (this + vector)
-    public void getSum(Vector vector) {
-        int maxLength = Math.max(this.components.length, vector.components.length);
-        this.components = Arrays.copyOf(this.components, maxLength);
+    public void add(Vector vector) {
+        if (vector.components.length > this.components.length) {
+            this.components = Arrays.copyOf(this.components, vector.components.length);
+        }
 
         for (int i = 0; i < vector.components.length; i++) {
             this.components[i] += vector.components[i];
@@ -66,14 +71,16 @@ public class Vector {
 
     // Статический метод для сложения векторов
     public static Vector getSum(Vector vector1, Vector vector2) {
-        vector1.getSum(vector2);
-        return new Vector(Arrays.copyOf(vector1.components, vector1.components.length));
+        Vector copy = new Vector(vector1);
+        copy.add(vector2);
+        return copy;
     }
 
     // Нестатический метод для вычитания векторов (this - vector)
-    public void getDifference(Vector vector) {
-        int maxLength = Math.max(this.components.length, vector.components.length);
-        this.components = Arrays.copyOf(this.components, maxLength);
+    public void subtract(Vector vector) {
+        if (vector.components.length > this.components.length) {
+            this.components = Arrays.copyOf(this.components, vector.components.length);
+        }
 
         for (int i = 0; i < vector.components.length; i++) {
             this.components[i] -= vector.components[i];
@@ -82,8 +89,9 @@ public class Vector {
 
     // Статический метод для вычитания векторов (vector1 - vector2)
     public static Vector getDifference(Vector vector1, Vector vector2) {
-        vector1.getDifference(vector2);
-        return new Vector(Arrays.copyOf(vector1.components, vector1.components.length));
+        Vector copy = new Vector(vector1);
+        copy.subtract(vector2);
+        return copy;
     }
 
     // Статический метод для нахождения скалярного произведения ("dot product")
@@ -112,34 +120,37 @@ public class Vector {
 
     // Нестатический метод для получения длины вектора
     public double getLength() {
-        double vectorLength = 0;
+        double sumOfSquares = 0;
 
         for (double component : this.components) {
-            vectorLength += Math.pow(component, 2);
+            sumOfSquares += Math.pow(component, 2);
         }
 
-        return Math.sqrt(vectorLength);
+        return Math.sqrt(sumOfSquares);
     }
 
     // Нестатический метод для получения компоненты вектора по индексу
     public double getComponent(int index) {
-        return this.components[index];
+        return components[index];
     }
 
     // Нестатический метод для установки компоненты вектора по индексу
     public void setComponent(int index, double component) {
-        this.components[index] = component;
+        components[index] = component;
     }
 
     // Переопределение метода equals
     @Override
     public boolean equals(Object object) {
+        if (object == this) {
+            return true;
+        }
         if (object == null || object.getClass() != this.getClass()) {
             return false;
         }
 
         Vector vector = (Vector) object;
-        return components.length == vector.components.length && components == vector.components;
+        return components.length == vector.components.length && Arrays.equals(components, vector.components);
     }
 
     // Переопределение метода hashCode
