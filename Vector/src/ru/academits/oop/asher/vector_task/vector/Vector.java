@@ -16,7 +16,7 @@ public class Vector {
 
     // Второй конструктор - конструктор копирования
     public Vector(Vector vector) {
-        this.components = Arrays.copyOf(vector.components, vector.getSize());
+        components = Arrays.copyOf(vector.components, vector.getSize());
     }
 
     // Третий конструктор, принимающий массив components
@@ -60,12 +60,12 @@ public class Vector {
 
     // Нестатический метод для сложения векторов (this + vector)
     public void add(Vector vector) {
-        if (vector.components.length > this.components.length) {
-            this.components = Arrays.copyOf(this.components, vector.components.length);
+        if (vector.components.length > components.length) {
+            components = Arrays.copyOf(components, vector.components.length);
         }
 
         for (int i = 0; i < vector.components.length; i++) {
-            this.components[i] += vector.components[i];
+            components[i] += vector.components[i];
         }
     }
 
@@ -78,12 +78,12 @@ public class Vector {
 
     // Нестатический метод для вычитания векторов (this - vector)
     public void subtract(Vector vector) {
-        if (vector.components.length > this.components.length) {
-            this.components = Arrays.copyOf(this.components, vector.components.length);
+        if (vector.components.length > components.length) {
+            components = Arrays.copyOf(components, vector.components.length);
         }
 
         for (int i = 0; i < vector.components.length; i++) {
-            this.components[i] -= vector.components[i];
+            components[i] -= vector.components[i];
         }
     }
 
@@ -109,7 +109,7 @@ public class Vector {
     // Нестатический метод для умножения вектора на скаляр
     public void multiplyByScalar(double scalar) {
         for (int i = 0; i < components.length; i++) {
-            components[i] = components[i] * scalar;
+            components[i] *= scalar;
         }
     }
 
@@ -145,7 +145,7 @@ public class Vector {
         if (object == this) {
             return true;
         }
-        if (object == null || object.getClass() != this.getClass()) {
+        if (object == null || object.getClass() != getClass()) {
             return false;
         }
 
