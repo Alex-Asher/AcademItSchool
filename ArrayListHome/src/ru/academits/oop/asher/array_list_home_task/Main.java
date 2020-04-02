@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) {
         // Часть 1: чтение строк из файла и запись их в список
         ArrayList<String> strings = new ArrayList<>();
 
@@ -15,6 +15,8 @@ public class Main {
             while (scanner.hasNextLine()) {
                 strings.add(scanner.nextLine());
             }
+        } catch (FileNotFoundException e) {
+            System.out.println("Файл не найден.");
         }
 
         System.out.println(strings);
@@ -25,6 +27,7 @@ public class Main {
         for (int i = 0; i < numbers.size(); i++) {
             if (numbers.get(i) % 2 == 0) {
                 numbers.remove(i);
+                i--;
             }
         }
 
@@ -33,6 +36,7 @@ public class Main {
         // Часть 3: создание списка без повторов
         ArrayList<Integer> listWithRepeats = new ArrayList<>(Arrays.asList(1, 5, 2, 1, 3, 5, 6, 7));
         ArrayList<Integer> listWithoutRepeats = new ArrayList<>();
+        listWithoutRepeats.ensureCapacity(listWithRepeats.size());
 
         for (Integer element : listWithRepeats) {
             if (!listWithoutRepeats.contains(element)) {
