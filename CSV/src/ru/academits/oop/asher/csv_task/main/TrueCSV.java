@@ -1,13 +1,16 @@
-package ru.academits.oop.asher.csv_task.csv;
+package ru.academits.oop.asher.csv_task.main;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Scanner;
 
 public class TrueCSV {
-    public static void changeCSVToHTML(String[] args) throws FileNotFoundException {
+    public static void changeCSVToHTML(String[] args) {
+        if (args.length != 2) {
+            System.out.println("Пожалуйста, задайте правильные аргументы программы.");
+            System.out.println("Первый аргумент - путь к файлу CSV. Второй аргумент - путь к файлу HTML.");
+            return;
+        }
+
         // Принимаем пути к файлам из аргументов программы
         String pathToCSV = args[0];
         String pathToHTML = args[1];
@@ -25,7 +28,7 @@ public class TrueCSV {
 
             writer.println("<head>");
             writer.println("<meta charset=\"UTF-8\">");
-            writer.println("<title> My table </title>");
+            writer.println("<title>My table</title>");
             writer.println("</head>");
 
             writer.println("<body>");
@@ -40,10 +43,10 @@ public class TrueCSV {
                 // Если строка новая и кавычки уже были, то мы в той же ячейке и печатаем перевод строки
                 // Если строка новая и кавычек ещё не было, то мы объявляем новую строку таблицы
                 if (quotesAreHere) {
-                    writer.print(" <br/> ");
+                    writer.print("<br/>");
                 } else {
                     writer.println("<tr>");
-                    writer.print("<td> ");
+                    writer.print("<td>");
                 }
 
                 // Идём по символам текущей строки
@@ -53,16 +56,12 @@ public class TrueCSV {
                     // Сделаем проверки на символы <, >, &
                     if (currentChar == '<') {
                         writer.print("&lt;");
-                    }
-                    if (currentChar == '>') {
+                    } else if (currentChar == '>') {
                         writer.print("&gt;");
-                    }
-                    if (currentChar == '&') {
+                    } else if (currentChar == '&') {
                         writer.print("&amp;");
-                    }
-
-                    // Сделаем проверку на кавычку
-                    if (currentChar == '"') {
+                        // Сделаем проверку на кавычку
+                    } else if (currentChar == '"') {
                         // Если видим кавычку и она уже была раньше, то меняем переменную на false
                         if (quotesAreHere) {
                             quotesAreHere = false;
@@ -83,7 +82,7 @@ public class TrueCSV {
                             writer.print(", ");
                         } else {
                             // Если незакрытых кавычек нет, то мы объявляем переход к следующей ячейке
-                            writer.print(" </td> <td> ");
+                            writer.print("</td><td>");
                         }
                     } else {
                         // Если мы не зашли ни в какой из if'ов, то символ обычный и мы его просто печатаем
@@ -93,7 +92,7 @@ public class TrueCSV {
 
                 // Если к концу строки не осталось незакрытых кавычек, то объявляем новую строку
                 if (!quotesAreHere) {
-                    writer.println(" </td>");
+                    writer.println("</td>");
                     writer.println("</tr>");
                 }
             }
@@ -102,6 +101,8 @@ public class TrueCSV {
             writer.println("</table>");
             writer.println("</body>");
             writer.println("</html>");
+        } catch (FileNotFoundException e) {
+            System.out.println("Файл CSV не найден.");
         }
     }
 }

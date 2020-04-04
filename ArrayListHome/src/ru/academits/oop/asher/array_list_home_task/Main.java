@@ -35,8 +35,7 @@ public class Main {
 
         // Часть 3: создание списка без повторов
         ArrayList<Integer> listWithRepeats = new ArrayList<>(Arrays.asList(1, 5, 2, 1, 3, 5, 6, 7));
-        ArrayList<Integer> listWithoutRepeats = new ArrayList<>();
-        listWithoutRepeats.ensureCapacity(listWithRepeats.size());
+        ArrayList<Integer> listWithoutRepeats = new ArrayList<>(listWithRepeats.size());
 
         for (Integer element : listWithRepeats) {
             if (!listWithoutRepeats.contains(element)) {
