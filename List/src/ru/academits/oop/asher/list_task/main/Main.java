@@ -1,24 +1,22 @@
 package ru.academits.oop.asher.list_task.main;
 
-import ru.academits.oop.asher.list_task.list.ListItem;
 import ru.academits.oop.asher.list_task.list.SinglyLinkedList;
 
 public class Main {
     public static void main(String[] args) {
-        ListItem<String> element4 = new ListItem<>("помидоры");
-        ListItem<String> element3 = new ListItem<>("молоко", element4);
-        ListItem<String> element2 = new ListItem<>("гречка", element3);
-        ListItem<String> element1 = new ListItem<>("картошка", element2);
-
-        SinglyLinkedList<String> products = new SinglyLinkedList<>(element1, 4);
+        SinglyLinkedList<String> products = new SinglyLinkedList<>();
+        products.add("помидоры");
+        products.add("молоко");
+        products.add("гречка");
+        products.add("картошка");
 
         // Получение размера списка
         System.out.println("Список покупок: " + products);
         System.out.println("Размер этого списка: " + products.getCount());
 
         // Получение значения первого элемента
-        ListItem<String> head = products.getHead();
-        System.out.println("Первый элемент этого списка: " + head.getData());
+        String head = products.getHead();
+        System.out.println("Первый элемент этого списка: " + head);
 
         // Получение значения по указанному индексу
         String thirdProduct = products.getValue(2);
@@ -62,12 +60,12 @@ public class Main {
 
         // Разворот списка за линейное время
         System.out.println("Мы решили развернуть список в обратную сторону.");
-        products.reverseList();
+        products.reverse();
         System.out.println("Теперь список выглядит так: " + products);
 
         // Копирование списка
         System.out.println("Мы решили копировать этот список.");
-        SinglyLinkedList<String> copy = products.copyList();
+        SinglyLinkedList<String> copy = products.copy();
         System.out.println("Копия выглядит так: " + copy);
     }
 }
