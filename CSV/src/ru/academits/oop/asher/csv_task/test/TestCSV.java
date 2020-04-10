@@ -1,12 +1,12 @@
 package ru.academits.oop.asher.csv_task.test;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class TestCSV {
-    public static void main(String[] args) {
+    public static void changeCSVToHTML(String[] args) {
         try (Scanner scanner = new Scanner(new FileInputStream("CSV.csv"));
              PrintWriter writer = new PrintWriter("CSV.html")) {
             writer.println("<!DOCTYPE html>");
@@ -85,8 +85,8 @@ public class TestCSV {
             writer.println("</table>");
             writer.println("</body>");
             writer.println("</html>");
-        } catch (FileNotFoundException e) {
-            System.out.println("Файл CSV не найден.");
+        } catch (IOException e) {
+            System.out.println("Возникла ошибка при попытке чтения CSV файла.");
         }
     }
 }

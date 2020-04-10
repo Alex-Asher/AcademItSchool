@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.Scanner;
 
 public class TrueCSV {
-    public static void changeCSVToHTML(String[] args) {
+    public static void main(String[] args) {
         if (args.length != 2) {
             System.out.println("Пожалуйста, задайте правильные аргументы программы.");
             System.out.println("Первый аргумент - путь к файлу CSV. Второй аргумент - путь к файлу HTML.");
@@ -101,8 +101,8 @@ public class TrueCSV {
             writer.println("</table>");
             writer.println("</body>");
             writer.println("</html>");
-        } catch (FileNotFoundException e) {
-            System.out.println("Файл CSV не найден.");
+        } catch (IOException e) {
+            System.out.println("Возникла ошибка при попытке чтения CSV файла.");
         }
     }
 }
