@@ -1,14 +1,29 @@
-package ru.academits.oop.asher.csv_task.test;
+package ru.academits.oop.asher.csv_task;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Scanner;
 
-public class TestCSV {
-    public static void changeCSVToHTML(String[] args) {
-        try (Scanner scanner = new Scanner(new FileInputStream("CSV.csv"));
-             PrintWriter writer = new PrintWriter("CSV.html")) {
+public class CsvConverter {
+    public static void main(String[] args) {
+        if (args.length != 2) {
+            System.out.println("Пожалуйста, задайте правильные аргументы программы.");
+            System.out.println("Первый аргумент - путь к файлу CSV. Второй аргумент - путь к файлу HTML.");
+            return;
+        }
+
+        // Принимаем пути к файлам из аргументов программы
+        String pathToCSV = args[0];
+        String pathToHTML = args[1];
+
+        // Создаём HTML файл, в который будем вести запись
+        File newHTMLFile = new File(pathToHTML);
+
+        // Запускаем потоки записи в HTML файл и чтения из CSV файла
+
+        try (Scanner scanner = new Scanner(new FileInputStream(pathToCSV));
+             PrintWriter writer = new PrintWriter(newHTMLFile)) {
+
+            // Печатаем в начало HTML документа необходимые теги
             writer.println("<!DOCTYPE html>");
             writer.println("<html>");
 
@@ -20,6 +35,7 @@ public class TestCSV {
             writer.println("<body>");
             writer.println("<table border=\"1\">");
 
+            // Реализуем основную логику программы
             boolean quotesAreHere = false;
 
             while (scanner.hasNextLine()) {
@@ -82,6 +98,7 @@ public class TestCSV {
                 }
             }
 
+            // Печатаем в конец HTML документа необходимые теги
             writer.println("</table>");
             writer.println("</body>");
             writer.println("</html>");
