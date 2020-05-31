@@ -25,13 +25,14 @@ public class SinglyLinkedList<T> {
     public void add(T data) {
         if (count == 0) {
             insertFirst(data);
-        } else {
-            ListItem<T> lastElement = findElement(count - 1);
-            ListItem<T> element = new ListItem<>(data);
-
-            lastElement.setNext(element);
-            count++;
+            return;
         }
+
+        ListItem<T> lastElement = findElement(count - 1);
+        ListItem<T> element = new ListItem<>(data);
+
+        lastElement.setNext(element);
+        count++;
     }
 
     // Вспомогательный метод: получение узла по индексу
@@ -65,6 +66,10 @@ public class SinglyLinkedList<T> {
 
     // Удаление элемента по индексу. Возвращается значение элемента
     public T deleteElement(int index) {
+        if (index < 0 || index >= count) {
+            throw new IndexOutOfBoundsException("Индекс выходит за границы списка.");
+        }
+
         if (index == 0) {
             return deleteFirst();
         }
@@ -86,6 +91,15 @@ public class SinglyLinkedList<T> {
 
     // Вставка элемента по индексу
     public void insertElement(int index, T data) {
+        if (index < 0 || index >= count) {
+            throw new IndexOutOfBoundsException("Индекс выходит за границы списка.");
+        }
+
+        if (index == 0) {
+            insertFirst(data);
+            return;
+        }
+
         ListItem<T> previousElement = findElement(index - 1);
         ListItem<T> element = new ListItem<>(data);
         ListItem<T> nextElement = previousElement.getNext();
@@ -97,9 +111,17 @@ public class SinglyLinkedList<T> {
 
     // Удаление узла по значению. Выдаёт true, если элемент был удалён
     public boolean deleteElement(T data) {
+        if (count == 0) {
+            throw new NoSuchElementException("Вызов метода невозможен для пустого списка.");
+        }
+
         if (Objects.equals(head.getData(), data)) {
             deleteFirst();
             return true;
+        }
+
+        if (count == 1) {
+            return false;
         }
 
         ListItem<T> previousElement = head;
@@ -176,7 +198,7 @@ public class SinglyLinkedList<T> {
     @Override
     public String toString() {
         if (count == 0) {
-            return ("Список пуст.");
+            return "{}";
         }
 
         StringBuilder stringBuilder = new StringBuilder();
