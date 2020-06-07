@@ -112,7 +112,7 @@ public class SinglyLinkedList<T> {
     // Удаление узла по значению. Выдаёт true, если элемент был удалён
     public boolean deleteElement(T data) {
         if (count == 0) {
-            throw new NoSuchElementException("Вызов метода невозможен для пустого списка.");
+            return false;
         }
 
         if (Objects.equals(head.getData(), data)) {
@@ -182,12 +182,25 @@ public class SinglyLinkedList<T> {
             new SinglyLinkedList<>();
         }
 
-        SinglyLinkedList<T> copy = new SinglyLinkedList<>();
-        ListItem<T> element = head;
+        if (count == 1) {
+            SinglyLinkedList<T> copy = new SinglyLinkedList<>();
+            copy.insertFirst(head.getData());
+            copy.count = count;
+            return copy;
+        }
 
-        for (int i = 0; i < count; i++) {
-            copy.add(element.getData());
+        SinglyLinkedList<T> copy = new SinglyLinkedList<>();
+        copy.insertFirst(head.getData());
+
+        ListItem<T> element = head.getNext();
+        ListItem<T> copyElement = copy.head;
+
+        for (int i = 1; i < count; i++) {
+            ListItem<T> newCopyElement = new ListItem<>(element.getData());
+            copyElement.setNext(newCopyElement);
+
             element = element.getNext();
+            copyElement = newCopyElement;
         }
 
         copy.count = count;
