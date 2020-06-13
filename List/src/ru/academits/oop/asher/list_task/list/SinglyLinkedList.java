@@ -185,7 +185,6 @@ public class SinglyLinkedList<T> {
         if (count == 1) {
             SinglyLinkedList<T> copy = new SinglyLinkedList<>();
             copy.insertFirst(head.getData());
-            copy.count = count;
             return copy;
         }
 
